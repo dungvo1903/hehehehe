@@ -184,7 +184,7 @@ function initPhotoGallery() {
 }
 
 // Hộp thư tay
-const API_URL = "https://script.google.com/macros/s/AKfycby.../exec"; // Thay bằng URL Web App của bạn
+const API_URL = "https://script.google.com/macros/s/AKfycbwg7YBpse4tCgNHkeucC5cbRZuFL0hDzTfElWq3lPM2MtIxV-HR7lc8Mv4-_1nwC1e68Q/exec"; // Thay bằng URL Web App của bạn
 
 function initLoveLetter() {
   const form = document.getElementById('loveLetterForm');
