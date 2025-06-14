@@ -184,24 +184,35 @@ function initPhotoGallery() {
 }
 
 // Hộp thư tay
-function initLoveLetter() {
-    const form = document.getElementById('loveLetterForm');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const letterContent = document.getElementById('letterContent').value;
-        
-        if (letterContent.trim() !== '') {
-            localStorage.setItem('loveLetter', letterContent);
-            showSavedLetter();
-            alert('💌 Thư của bạn đã được lưu lại!');
-            form.reset();
-        } else {
-            alert('Vui lòng viết nội dung thư trước khi gửi!');
-        }
-    });
-}
+const API_URL = "https://script.google.com/macros/s/AKfycby.../exec"; // Thay bằng URL Web App của bạn
 
+function initLoveLetter() {
+  const form = document.getElementById('loveLetterForm');
+  
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const content = document.getElementById('letterContent').value;
+
+    // Gửi thư lên Google Sheets
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          content: content,
+          device: navigator.userAgent 
+        })
+      });
+      
+      if (response.ok) {
+        alert('💌 Thư của bạn đã được lưu vào Google Sheets!');
+        form.reset();
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi thư:', error);
+    }
+  });
+}
 // Hiển thị thư đã lưu
 function showSavedLetter() {
     const savedLetter = localStorage.getItem('loveLetter');
